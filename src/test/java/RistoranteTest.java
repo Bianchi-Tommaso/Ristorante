@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import java.util.Vector;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -12,57 +6,86 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- *
- * @author HP
- */
-public class RistoranteTest {
+public class RistoranteTest
+{
     
     
     
-    public RistoranteTest() {
+    public RistoranteTest() 
+    {
     }
     
     @BeforeAll
-    public static void setUpClass() {
+    public static void setUpClass() 
+    {
     }
     
     @AfterAll
-    public static void tearDownClass() {
+    public static void tearDownClass() 
+    {
     }
     
     @BeforeEach
-    public void setUp() {
+    public void setUp() 
+    {
     }
     
     @AfterEach
-    public void tearDown() {
+    public void tearDown() 
+    {
     }
 
     /**
      * Test of AggiungiPiatto method, of class Ristorante.
      */
     @Test
-    public void testAggiungiPiatto() {
-        System.out.println("AggiungiPiatto");
-        Piatti x = null;
-        Ristorante instance = new Ristorante();
-        instance.AggiungiPiatto(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testAggiungiPiatto() 
+    {
+        Piatti primo = new Piatti("Spaghetti", "Primo");
+        Piatti secondo = new Piatti("Piatto", "Secondo");
+        Piatti terzo = new Piatti("Spaghetti", "Primo");
+        Piatti quarto = new Piatti("Piatto", "Secondo");
+        Ristorante r = new Ristorante();
+        
+        //Vengono aggiunti 4 piatti di cui 2 rimossi, quindi ci aspettiamo che il risultato reale sia 2.
+        r.AggiungiPiatto(primo);
+        r.AggiungiPiatto(secondo);
+        r.RimozionePiatto(primo);
+        r.AggiungiPiatto(quarto);
+        r.AggiungiPiatto(terzo);
+        r.RimozionePiatto(secondo);
+    
+        int expResult = 2;                  //Nella variabile expResult vienei inserito il risultato teorico, quello che ci aspettiamo noi. in questo caso 2
+        int result = r.getSizeMenu();       // Nella variabile reuslt viene inserito il risultato reale, quello calcolato dal metodo.            
+        
+        System.out.println("Risultato Teorico: " + expResult + " Risultato Reale: " + result); // Questa stringa viene stampata in caso il test dovesse fallire(Viene stampata comunque nell'output della console) e stampare il risultato teorico,
+        assertEquals(expResult, result); //COntrolla Se I Valori Sono Giusti                   //ovvero quello che ci aspettavamo, e quello reale che il metodo ha calcolato.
+        
     }
 
     /**
      * Test of RimozionePiatto method, of class Ristorante.
      */
     @Test
-    public void testRimozionePiatto() {
-        System.out.println("RimozionePiatto");
-        Piatti x = null;
-        Ristorante instance = new Ristorante();
-        instance.RimozionePiatto(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRimozionePiatto() 
+    {
+        
+        Piatti primo = new Piatti("Spaghetti", "Primo");
+        Piatti secondo = new Piatti("Piatto", "Secondo");
+        Ristorante r = new Ristorante();
+        
+        //Vengono aggiunti 2 piatti al vettore di cui uno tolto, quindi la grandezza del vettore sara 1, quindi ci aspettiamo che il risultato reale sia 1
+        r.AggiungiPiatto(primo);
+        r.AggiungiPiatto(secondo);
+        r.RimozionePiatto(primo);
+        
+          int result = r.getSizeMenu();   // Nella variabile reuslt viene inserito il risultato reale, quello calcolato dal metodo.                                   
+          int expResult = 1;              //Nella variabile expResult vienei inserito il risultato teorico, quello che ci aspettiamo noi. in questo caso 1
+       
+        System.out.println("Risultato Teorico: " + expResult + " Risultato Reale: " + result);// Questa stringa viene stampata in caso il test dovesse fallire(Viene stampata comunque nell'output della console) e stampare il risultato teorico,
+        assertEquals(expResult, result); //COntrolla Se I Valori Sono Giusti                   //ovvero quello che ci aspettavamo, e quello reale che il metodo ha calcolato.
+        
+        
     }
 
     /**
@@ -70,25 +93,50 @@ public class RistoranteTest {
      */
     @Test
     public void testAggiungiOrdine() {
-        System.out.println("AggiungiOrdine");
-        Ordine x = null;
-        Ristorante instance = new Ristorante();
-        instance.AggiungiOrdine(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Ordine_Tavolo tavolo1 = new Ordine_Tavolo(3, "Marcello");
+        Ordine_Tavolo tavolo2 = new Ordine_Tavolo(3, "Marcello");
+        Ordine_Tavolo tavolo3 = new Ordine_Tavolo(3, "Marcello");
+        Ordine_Tavolo tavolo4 = new Ordine_Tavolo(3, "Marcello");
+        Ordine_Tavolo tavolo5 = new Ordine_Tavolo(3, "Marcello");
+        Ordine_Tavolo tavolo6 = new Ordine_Tavolo(3, "Marcello");
+        Ristorante r = new Ristorante();      
+        
+        //Vengono aggiunti 6 ordini al vettore per poi toglierne 2, quindi la grandezza del vettore sara 4, infatti ci aspettiamo che il risultato reale sia 4
+        r.AggiungiOrdine(tavolo1);
+        r.AggiungiOrdine(tavolo2);
+        r.AggiungiOrdine(tavolo3);
+        r.AggiungiOrdine(tavolo4);
+        r.AggiungiOrdine(tavolo5);
+        r.AggiungiOrdine(tavolo6);
+        r.RimozioneOrdine(tavolo2);
+        r.RimozioneOrdine(tavolo6);
+        
+        int result = r.getSizeOrdine(); // Nella variabile reuslt viene inserito il risultato reale, quello calcolato dal metodo.                                   
+        int expResult = 4;              //Nella variabile expResult vienei inserito il risultato teorico, quello che ci aspettiamo noi. in questo caso 4
+        
+        
+        System.out.println("Risultato Teorico: " + expResult + " Risultato Reale: " + result); // Questa stringa viene stampata in caso il test dovesse fallire (Viene stampata comunque nell'output della console) e stampare il risultato teorico,
+        assertEquals(expResult, result);                                                       //ovvero quello che ci aspettavamo, e quello reale che il metodo ha calcolato.
+        
     }
 
     /**
      * Test of RimozioneOrdine method, of class Ristorante.
      */
     @Test
-    public void testRimozioneOrdine() {
-        System.out.println("RimozioneOrdine");
-        Ordine x = null;
-        Ristorante instance = new Ristorante();
-        instance.RimozioneOrdine(x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testRimozioneOrdine() 
+    {    
+        Ordine_Tavolo tavolo2 = new Ordine_Tavolo(3, "Marcello");
+        Ristorante r = new Ristorante();      
+        
+        r.AggiungiOrdine(tavolo2); //Viene inserito un ordine, quindi il vettore che contiene tavolo2, la sua grandezza si è ingrandita ad 1
+        r.RimozioneOrdine(tavolo2);//Qui viene tolto l'ordine, quindi la grandezza del vettore ritorna a 0, infatti noi ci aspettiamo che il risultato torni 0.
+        
+        int result = r.getSizeOrdine(); // Nella variabile reuslt viene inserito il risultato reale, quello calcolato dal metodo.                                   
+        int expResult = 0;              //Nella variabile expResult vienei inserito il risultato teorico, quello che ci aspettiamo noi. in questo caso 0
+        
+        System.out.println("Risultato Teorico: " + expResult + " Risultato Reale: " + result); // Questa stringa viene stampata in caso il test dovesse fallire (Viene stampata comunque nell'output della console) e stampare il risultato teorico,
+        assertEquals(expResult, result); //COntrolla Se I Valori Sono Giusti                   //ovvero quello che ci aspettavamo, e quello reale che il metodo ha calcolato.
     }
 
     /**
@@ -98,25 +146,23 @@ public class RistoranteTest {
     public void testTipoPiatto() 
     {
         
-        Piatti Primo = new Piatti("Spaghetti", "Primo");
-        Piatti Secondo = new Piatti("Bistecca", "Secondo");
-        Piatti Primo2 = new Piatti("Lasagne", "Primo");
-        Piatti Secondo2 = new Piatti("Salsicce", "Secondo");
-        Piatti Secondo3 = new Piatti("Pollo", "Secondo");
+        Piatti primo = new Piatti("Spaghetti", "Primo");
+        Piatti secondo = new Piatti("Bistecca", "Secondo");
+        Piatti primo2 = new Piatti("Lasagne", "Primo");
+        Piatti secondo2 = new Piatti("Salsicce", "Secondo");
+        Piatti secondo3 = new Piatti("Pollo", "Secondo");
            
         Ristorante r = new Ristorante();
-                
-        r.AggiungiPiatto(Primo);
-        r.AggiungiPiatto(Secondo);
-        r.AggiungiPiatto(Primo2);
-        r.AggiungiPiatto(Secondo2);
-        r.AggiungiPiatto(Secondo3);
+          
+        //Vengono aggiunti vari piatti 
+        r.AggiungiPiatto(primo); 
+        r.AggiungiPiatto(secondo);
+        r.AggiungiPiatto(primo2);
+        r.AggiungiPiatto(secondo2);
+        r.AggiungiPiatto(secondo3);
         
         
-        
-        System.out.println("TipoPiatto");
-        assertEquals(2, r.TipoPiatto("Primo").size());
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(2, r.TipoPiatto("Primo").size()); //COntrolla Se I Valori Sono Giusti
         
     }
 
@@ -124,26 +170,54 @@ public class RistoranteTest {
      * Test of StampaPiatti method, of class Ristorante.
      */
     @Test
-    public void testStampaPiatti() {
-        System.out.println("StampaPiatti");
-        Ristorante instance = new Ristorante();
-        instance.StampaPiatti();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testStampaPiatti() 
+    {
+        Piatti primo = new Piatti("Spaghetti", "Primo");
+        Piatti secondo = new Piatti("Bistecca", "Secondo");
+        Piatti primo2 = new Piatti("Lasagne", "Primo");
+        Piatti secondo2 = new Piatti("Salsicce", "Secondo");
+        Piatti secondo3 = new Piatti("Pollo", "Secondo");
+           
+        Ristorante r = new Ristorante();
+                
+        r.AggiungiPiatto(primo);
+        r.AggiungiPiatto(secondo);
+        r.AggiungiPiatto(primo2);
+        r.AggiungiPiatto(secondo2);
+        r.AggiungiPiatto(secondo3);
     }
 
     /**
      * Test of IncassoGiornata method, of class Ristorante.
      */
     @Test
-    public void testIncassoGiornata() {
-        System.out.println("IncassoGiornata");
-        Ristorante instance = new Ristorante();
-        double expResult = 0.0;
-        double result = instance.IncassoGiornata();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIncassoGiornata() 
+    {
+        
+        Piatti primo = new Piatti("Spaghetti", "Primo");
+        Piatti secondo = new Piatti("Piatto", "Secondo");
+        Ingredienti ing1 = new Ingredienti("Pomodoro", 3, 1.50);
+        Ingredienti ing2 = new Ingredienti("Pasta", 150, 3.50);    
+        Ordine_Tavolo tavolo2 = new Ordine_Tavolo(3, "Marcello");
+        Ristorante r = new Ristorante();
+        
+        primo.AggiungiPiatto(ing2);
+        primo.AggiungiPiatto(ing1);
+        secondo.AggiungiPiatto(ing2);
+        primo.AggiungiPiatto(ing2);
+        secondo.AggiungiPiatto(ing1);
+        
+        tavolo2.AggiungiPiatto(primo);       // Viene aggiunto il piatto(primo) a tavolo2 
+        tavolo2.AggiungiPiatto(secondo);     // Viene aggiunto il piatto(secondo) a tavolo2   
+        
+        r.AggiungiOrdine(tavolo2);        // Viene aggiunto l'ordine(tavolo2) 
+        
+        double x = r.IncassoGiornata();  // Nella variabile x viene inserito il risultato reale, quello calcolato dal metodo.
+        double expResult = 13.5;         //Nella variabile expResult vienei inserito il risultato teorico, quello che ci aspettiamo noi.
+        double result = x;
+        
+         System.out.println("Risultato Teorico: " + expResult + " Risultato Reale: " + result); // Questa stringa viene stampata in caso il test dovesse fallire (Viene stampata comunque nell'output della console) e stampare il risultato teorico, 
+        assertEquals(expResult, result);   //COntrolla Se I Valori Sono Giusti                  //ovvero quello che ci aspettavamo, e quello reale che il metodo ha calcolato.
     }
     
 }
